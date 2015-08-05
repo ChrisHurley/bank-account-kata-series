@@ -32,6 +32,11 @@ namespace BankingKata
             var debitEntry = new CashDebitEntry(transactionDate, money);
             _transactionLog.Record(debitEntry);
         }
+        public void WithdrawCheck(DateTime transactionDate, Money money, CheckNumber checkNumber)
+        {
+            var debitEntry = new CheckDebitEntry(transactionDate, money, checkNumber);
+            _transactionLog.Record(debitEntry);
+        }
 
         public void PrintBalance(IPrinter printer)
         {
