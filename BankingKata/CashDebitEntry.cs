@@ -8,5 +8,10 @@ namespace BankingKata
         {
            
         }
+
+        public override string ToString()
+        {
+            return $"ATM {base.ToString()}";
+        }
     }
 }
