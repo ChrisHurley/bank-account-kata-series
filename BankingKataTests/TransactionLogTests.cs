@@ -36,7 +36,7 @@ namespace BankingKataTests
             var transactionLog = new Ledger();
 
             transactionLog.Record(new CashDebitEntry(DateTime.Now, new Money(1m)));
-            transactionLog.Record(new CheckDebitEntry(DateTime.Now, new Money(3m)));
+            transactionLog.Record(new CheckDebitEntry(DateTime.Now, new Money(3m), new CheckNumber(100001)));
 
             var actualTotal = transactionLog.Accept(new BalanceCalculatingVisitor(), new Money(0m));
 
