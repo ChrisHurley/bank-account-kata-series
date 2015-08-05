@@ -76,7 +76,7 @@ namespace BankingKataTests
         public void CashWithdrawalIsPrinted()
         {
             var account = new Account();
-            account.Withdraw(new DateTime(2015, 07, 13), new Money(123m));
+            account.WithdrawCash(new DateTime(2015, 07, 13), new Money(123m));
 
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
