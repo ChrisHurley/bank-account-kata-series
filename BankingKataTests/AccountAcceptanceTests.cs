@@ -29,5 +29,14 @@ namespace BankingKataTests
             var expectedBalance = new Money(4m);
             Assert.That(account.CalculateBalance(), Is.EqualTo(expectedBalance));
         }
+
+        [Test]
+        public void WithdrawingMoreThanOverdraftLimitThrowsException()
+        {
+            var accountWithOverdraft = new AccountWithOverdraft(new Account(), new Money(1000m));
+
+            var debitEntry = new ATMDebitEntry(DateTime.Now, new Money(1001m));
+            Assert.Throws<OverdraftLimitReachedException>(() => accountWithOverdraft.Withdraw(debitEntry));
+        }
     }
 }
