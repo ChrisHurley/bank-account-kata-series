@@ -5,19 +5,19 @@ namespace BankingKata
     public class AccountWithOverdraft : IAccount
     {
         private readonly IAccount m_Account;
-        private readonly Money m_Money;
+        private readonly Money m_OverdraftLimit;
 
-        public AccountWithOverdraft(IAccount account, Money money)
+        public AccountWithOverdraft(IAccount account, Money overdraftLimit)
         {
             m_Account = account;
-            m_Money = money;
+            m_OverdraftLimit = overdraftLimit;
         }
 
         public void Withdraw(DebitEntry debitEntry)
         {
             var balanceAfterWithdrawal = debitEntry.ApplyTo(CalculateBalance());
 
-            if (balanceAfterWithdrawal < m_Money)
+            if (balanceAfterWithdrawal < m_OverdraftLimit)
             {
                 throw new OverdraftLimitReachedException();
             }
