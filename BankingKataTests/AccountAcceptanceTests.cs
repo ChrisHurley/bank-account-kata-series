@@ -33,7 +33,7 @@ namespace BankingKataTests
         [Test]
         public void WithdrawingMoreThanOverdraftLimitThrowsException()
         {
-            var accountWithOverdraft = new AccountWithOverdraft(new Account(), new Money(-1000m));
+            var accountWithOverdraft = new AccountWithOverdraft(new Account(), new UnarrangedOverdraft(new Money(-1000m)));
 
             var debitEntry = new ATMDebitEntry(DateTime.Now, new Money(1001m));
             Assert.Throws<OverdraftLimitReachedException>(() => accountWithOverdraft.Withdraw(debitEntry));
@@ -42,7 +42,7 @@ namespace BankingKataTests
         [Test]
         public void WithdrawingLessThanOverdraftLimitDoesNotThrowsException()
         {
-            var accountWithOverdraft = new AccountWithOverdraft(new Account(), new Money(-1000m));
+            var accountWithOverdraft = new AccountWithOverdraft(new Account(), new UnarrangedOverdraft(new Money(-1000m)));
 
             var debitEntry = new ATMDebitEntry(DateTime.Now, new Money(999m));
             Assert.DoesNotThrow(() => accountWithOverdraft.Withdraw(debitEntry));
